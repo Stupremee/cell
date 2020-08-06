@@ -1,6 +1,6 @@
 # Cell
 
-**Cell is WIP and many don't work or are not even implemented**
+**Cell is WIP and many features don't work or are not even implemented**
 
 Cell is a statically typed, general purpose systems programming language.
 
