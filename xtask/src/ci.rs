@@ -7,9 +7,10 @@ use anyhow::{bail, Context, Result};
 pub fn run_ci(miri: bool) -> Result<()> {
     let _d = pushd(project_root()?);
 
-    run!("cargo fmt -- --check").context("rustfmt failed")?;
-    run!("cargo clippy --all-features --all-targets --tests").context("clippy failed")?;
-    run!("cargo test").context("tests failed")?;
+    run!("cargo fmt --workspace -- --check").context("rustfmt failed")?;
+    run!("cargo clippy --workspace --all-features --all-targets --tests")
+        .context("clippy failed")?;
+    run!("cargo test --workspace").context("tests failed")?;
 
     if miri {
         run_miri()?;
@@ -25,6 +26,6 @@ fn run_miri() -> Result<()> {
                Run 'rustup component add miri' to install miri"
         )
     }
-    run!("cargo miri test")?;
+    run!("cargo miri test --workspace")?;
     Ok(())
 }

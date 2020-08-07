@@ -1,6 +1,8 @@
 //! `cargo xtask` command workflows.
 //!
 //! See https://github.com/matklad/cargo-xtask/
+//!
+//! [`sda`]: askdjas
 #![warn(rust_2018_idioms)]
 
 use anyhow::Result;
@@ -25,6 +27,12 @@ fn main() -> Result<()> {
 
     let mut args = Arguments::from_env();
     let subcommand = args.subcommand()?.unwrap_or_default();
+
+    if args.contains("--help") {
+        args.finish()?;
+        print!("{}", HELP);
+        return Ok(());
+    }
 
     match subcommand.as_str() {
         "ci" => {
