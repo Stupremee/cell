@@ -3,14 +3,37 @@
 //! See https://github.com/matklad/cargo-xtask/
 #![warn(rust_2018_idioms)]
 
-mod env;
-mod shell;
-
-use anyhow::{bail, Context, Result};
+use anyhow::Result;
 use pico_args::Arguments;
+use xtask::{ci, project_root, pushd};
+
+const HELP: &str = "\
+cargo xtask
+
+Run custom build commands.
+
+USAGE:
+    cargo xtask <COMMAND>
+
+COMMANDS:
+    ci         Runs everything that is tested in the CI.
+    codegen    Pre generate all required source files.
+";
 
 fn main() -> Result<()> {
-    let args = Arguments::from_env();
+    let _root = pushd(project_root()?);
+
+    let mut args = Arguments::from_env();
+    let subcommand = args.subcommand()?.unwrap_or_default();
+
+    match subcommand.as_str() {
+        "ci" => {
+            let not_miri = args.contains("--no-miri");
+            args.finish()?;
+            ci::run_ci(!not_miri)?;
+        }
+        _ => print!("{}", HELP),
+    }
 
     Ok(())
 }

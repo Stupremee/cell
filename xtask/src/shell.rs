@@ -25,7 +25,8 @@ macro_rules! run {
 }
 
 #[inline]
-fn run_process(cmd: &str, echo: bool, stdin: Option<&[u8]>) -> Result<String> {
+pub fn run_process(cmd: impl AsRef<str>, echo: bool, stdin: Option<&[u8]>) -> Result<String> {
+    let cmd = cmd.as_ref();
     run_process_inner(cmd, echo, stdin)
         .with_context(|| format!("failed to execute command `{}`", cmd))
 }
