@@ -1,11 +1,11 @@
 [package]
-name = "cell"
+name = "xtask"
 version = "0.1.0"
 authors = ["Justus K <justus.k@protonmail.com>"]
 edition = "2018"
+publish = false
 license = "Zlib"
 
 [dependencies]
-
-[workspace]
-members = ["xtask"]
+anyhow = "1.0.32"
+pico-args = "0.3.3"

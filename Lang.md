@@ -80,6 +80,9 @@ All binary operators are right associative.
 All assignment operators have the same precedence.
 They are expressions, but will produce a `Unit` type
 
+Every binary operator, except the `**` can be used as an assignment.
+Just append a `=`. E.g. `+=`, `%=`.
+
 **Named tuples**
 
 ```
