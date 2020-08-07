@@ -4,6 +4,7 @@
 #![warn(rust_2018_idioms)]
 
 mod env;
+mod shell;
 
 use anyhow::{bail, Context, Result};
 use pico_args::Arguments;

@@ -9,21 +9,9 @@ use std::{
     path::{Path, PathBuf},
 };
 
-/// Runs the given process in the current environment and
-/// will print the current executing command to stdout
-#[macro_export]
-macro_rules! run {
-    ($($expr:expr),*) => {
-        run!($($expr),*; echo = true)
-    };
-
-    ($($expr:expr),* ; echo = $echo:expr) => {
-        $crate::env::run_process(format!($($expr),*), $echo, None)
-    };
-
-    ($($expr:expr),* ; |$stdin:expr) => {
-        $crate::env::run_process(format!($($expr),*), false, Some($stdin))
-    };
+/// Returns the path at the top of the stack.
+pub fn cwd() -> PathBuf {
+    Env::with(|env| env.cwd().into())
 }
 
 /// Object that will pop the pushed path if dropped.
