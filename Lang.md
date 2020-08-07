@@ -9,6 +9,7 @@
 - Floats
 - Strings
 - Characters
+- Void / Unit
 
 ```
 true, false
@@ -16,7 +17,68 @@ true, false
 0.0, 123e5, 0xFF.FF
 "hello world", "cell"
 'a', 'b', '\x41'
+()
 ```
+
+**Binary Operators**
+
+The precedence increases the further down in the table the
+precedence column is.
+
+All binary operators are left associative,
+except the `**` operator.
+`**` is right associative.
+
+| Operator | Operation    | Precedence     |
+|:--------:|:------------:|:--------------:|
+|    &&    | Logical AND  | Logical        |
+|    ||    | Logical OR   | Logical        |
+|    &     | Bitiwise AND | Bitwise        |
+|    |     | Bitiwise OR  | Bitwise        |
+|    ^     | Bitiwise XOR | Bitwise        |
+|    >>    | Left shit    | Shifting       |
+|    <<    | Right Shift  | Shifting       |
+|    +     | Add          | Addition       |
+|    -     | Substract    | Addtition      |
+|    *     | Multiply     | Multiplication |
+|    /     | Divide       | Multiplication |
+|    %     | Modulus      | Multiplication |
+|    **    | Power        | Exponents      |
+
+**Comparison Operators**
+
+`!=` and `==` have a lower precedence than the other comparison operators.
+All other comparison operators have the same precedence and are left associative.
+
+| Operator | Operation             |
+|:--------:|:---------------------:|
+|    ==    | Equal                 |
+|    !=    | Not Equal             |
+|    <     | Less than             |
+|    >     | Greater than          |
+|    <=    | Less than or equal    |
+|    >=    | Greater than or equal |
+
+**Unary Operators**
+
+The precedence of all unary operators is the same and
+is higher than every other binary or comparison operator.
+
+All binary operators are right associative.
+
+| Operator | Operation     |
+|:--------:|:-------------:|
+|    &     | Pointer of    |
+|    *     | Dereference   |
+|    !     | Logical NOT   |
+|    !     | Bitiwise NOT  |
+|    +     | Unary PLUS    |
+|    -     | Unary MINUS   |
+
+**Assignment Operators**
+
+All assignment operators have the same precedence.
+They are expressions, but will produce a `Unit` type
 
 **Named tuples**
 
