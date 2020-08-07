@@ -1,11 +1,2 @@
-[package]
-name = "cell"
-version = "0.1.0"
-authors = ["Justus K <justus.k@protonmail.com>"]
-edition = "2018"
-license = "Zlib"
-
-[dependencies]
-
 [workspace]
-members = ["xtask"]
+members = ["xtask", "crates/cell_common"]
