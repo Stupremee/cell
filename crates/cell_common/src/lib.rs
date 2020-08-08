@@ -3,4 +3,5 @@
 #![warn(rust_2018_idioms)]
 
 mod macros;
+pub mod profiler;
 pub mod source;
