@@ -1,6 +1,6 @@
 //! Types for indexing a range in a source string.
 
-use core::ops::Range;
+use std::ops::{Deref, Range};
 use text_size::TextRange;
 
 /// A index to a single byte in a string.
@@ -65,5 +65,43 @@ where
 {
     fn from(span: Span) -> Self {
         span.range.into()
+    }
+}
+
+/// Represents any `T` that is located at a specific [`Span`].
+///
+/// [`Span`]: ./struct.Span.html
+#[derive(Clone, Debug, Hash, Eq, PartialEq)]
+pub struct Spanned<T> {
+    span: Span,
+    data: T,
+}
+
+impl<T> Spanned<T> {
+    /// Creates a new `Spanned` object with the given `data` and `span`.
+    pub fn new(data: T, span: Span) -> Self {
+        Self { data, span }
+    }
+
+    /// Returns the [`Span`] of this spanned data.
+    ///
+    /// [`Span`]: ./struct.Span.html
+    pub fn span(&self) -> Span {
+        self.span
+    }
+
+    /// Destructs this spanned data into it's `T` and [`Span`].
+    ///
+    /// [`Span`]: ./struct.Span.html
+    pub fn destruct(self) -> (T, Span) {
+        (self.data, self.span)
+    }
+}
+
+impl<T> Deref for Spanned<T> {
+    type Target = T;
+
+    fn deref(&self) -> &Self::Target {
+        &self.data
     }
 }
