@@ -1,6 +1,6 @@
 //! Types for indexing a range in a source string.
 
-use std::ops::Range;
+use core::ops::Range;
 use text_size::TextRange;
 
 /// A index to a single byte in a string.
