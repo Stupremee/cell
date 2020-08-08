@@ -1,4 +1,0 @@
-// The cell grammar implemented in `ungrammar`.
-//
-// This grammar is used to generate `rowan` syntax kinds
-// and the AST.
