@@ -3,6 +3,7 @@ name = "cell_common"
 version = "0.1.0"
 authors = ["Justus K <justus.k@protonmail.com>"]
 edition = "2018"
+license = "Zlib"
 
 [dependencies]
 text-size = "1.0.0"

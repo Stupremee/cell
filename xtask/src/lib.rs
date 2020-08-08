@@ -1,6 +1,7 @@
 //! Library for the xtask binary.
 #![warn(rust_2018_idioms)]
 
+mod ast;
 pub mod ci;
 mod env;
 pub mod shell;
