@@ -154,13 +154,13 @@ while {
 ## Functions and types
 
 ```
-// `type def` creates a new struct like type
-type def Foo = {
+// `type` creates a new struct like type
+type Foo {
     val: String,
 }
 
 // This can be used to imlpement methods on a type
-type Foo {
+impl Foo {
     def execute(val: i32) {
         io.println("Executing...");
         black_box(val);
@@ -175,7 +175,7 @@ def foo(a: i32, b: i32): String {
 }
 
 // Define a trait
-type trait SomeTrait = {
+trait SomeTrait = {
     def to_str(): String;
 }
 
@@ -187,14 +187,14 @@ def generics[A: SomeTrait](val: A): String {
 Generics on a type work too
 
 ```
-type def Array[T] = {
+type Array[T] {
     // raw ptr type
     ptr: *T,
     // usz = usize
     len: usz,
 }
 
-type Array[T] {
+impl[T] Array[T] {
     def push(elem: T) {
         *this.ptr = elem;
         this.ptr += 1;
@@ -206,13 +206,13 @@ type Array[T] {
 **Unions**
 
 ```
-type union Option[T] = {
+union Option[T] {
     // The right side defines the data inside this variant
     Some = T,
     None,
 }
 
-type union Complex = {
+union Complex {
     First = {a: i32, b: i32, c: i32},
     Second = {String, Option[i32]},
 }

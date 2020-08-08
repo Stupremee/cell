@@ -15,12 +15,14 @@ def fib(n: i32): i32 {
   };
 }
 
-type def Array[T] = {
+type Array[T] {
   ptr: *T,
   len: u32,
 }
 
-type Array[T] {
+// The current plan is to not support methods in structs.
+// Will probably change in the future
+impl[T] Array[T] {
   def push(elem: T) {
     *this.ptr = elem;
     this.ptr += 1;
