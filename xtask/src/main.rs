@@ -7,7 +7,7 @@
 
 use anyhow::Result;
 use pico_args::Arguments;
-use xtask::{ci, project_root, pushd};
+use xtask::{ci, codegen, project_root, pushd};
 
 const HELP: &str = "\
 cargo xtask
@@ -39,6 +39,10 @@ fn main() -> Result<()> {
             let not_miri = args.contains("--no-miri");
             args.finish()?;
             ci::run_ci(!not_miri)?;
+        }
+        "codegen" => {
+            args.finish()?;
+            codegen::generate_syntax()?;
         }
         _ => print!("{}", HELP),
     }
