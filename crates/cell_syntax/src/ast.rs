@@ -208,7 +208,7 @@ pub enum CmpOp {
 #[derive(Debug, Clone, Hash, PartialEq, Eq)]
 pub enum UnOp {
     Ref,
-    Dereference,
+    Deref,
     Not,
     Plus,
     Minus,

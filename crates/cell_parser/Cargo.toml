@@ -1,0 +1,12 @@
+[package]
+name = "cell_parser"
+version = "0.1.0"
+authors = ["Justus K <justus.k@protonmail.com>"]
+edition = "2018"
+license = "Zlib"
+
+[dependencies]
+salsa = "0.15.2"
+cell_common = { path = "../cell_common" }
+cell_syntax = { path = "../cell_syntax" }
+logos = "0.11.4"

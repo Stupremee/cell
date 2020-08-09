@@ -1,5 +1,6 @@
 [workspace]
 members = [
     "crates/cell_common",
-    "crates/cell_syntax"
+    "crates/cell_syntax",
+    "crates/cell_parser"
 ]

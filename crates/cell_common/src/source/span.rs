@@ -1,6 +1,9 @@
 //! Types for indexing a range in a source string.
 
-use std::ops::{Deref, Range};
+use std::{
+    fmt,
+    ops::{Deref, Range},
+};
 use text_size::TextRange;
 
 /// A index to a single byte in a string.
@@ -65,6 +68,20 @@ where
 {
     fn from(span: Span) -> Self {
         span.range.into()
+    }
+}
+
+impl Into<Span> for Range<usize> {
+    fn into(self) -> Span {
+        let start = self.start as u32;
+        let end = self.end as u32;
+        Span::new(start, end)
+    }
+}
+
+impl fmt::Display for Span {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:?}..{:?}", self.start(), self.end())
     }
 }
 
