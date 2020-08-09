@@ -22,9 +22,11 @@
 /// [`salsa::InternKey`]: https://docs.rs/salsa/0.15.2/salsa/trait.InternKey.html
 #[macro_export]
 macro_rules! intern_id_struct {
-    ($(#[$meta:meta])*
+    ($(
+     $(#[$meta:meta])*
      pub struct $name:ident;
-    ) => {
+    )*) => {
+        $(
         #[derive(Debug, Clone, Copy, Hash, PartialEq, Eq)]
         $(#[$meta])*
         pub struct $name(salsa::InternId);
@@ -44,5 +46,6 @@ macro_rules! intern_id_struct {
                 self.0
             }
         }
+        )*
     };
 }

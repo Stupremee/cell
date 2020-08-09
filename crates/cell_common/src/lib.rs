@@ -6,6 +6,7 @@ pub mod error;
 mod macros;
 pub mod profiler;
 pub mod source;
+pub mod strings;
 
 use source::FileId;
 

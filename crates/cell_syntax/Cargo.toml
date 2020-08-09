@@ -6,3 +6,6 @@ edition = "2018"
 license = "Zlib"
 
 [dependencies]
+cell_common = { path = "../cell_common" }
+salsa = "0.15.2"
+ordered-float = "2.0.0"

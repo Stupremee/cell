@@ -1,6 +1,5 @@
 [workspace]
 members = [
-    "xtask",
     "crates/cell_common",
     "crates/cell_syntax"
 ]
