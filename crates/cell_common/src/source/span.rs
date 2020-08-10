@@ -1,5 +1,6 @@
 //! Types for indexing a range in a source string.
 
+use crate::source::FileId;
 use std::{
     fmt,
     ops::{Deref, Range},
@@ -100,11 +101,23 @@ impl<T> Spanned<T> {
         Self { data, span }
     }
 
+    /// Maps the data of this `Spanned` using the given mapper
+    /// and returns a new `Spanned` with the mapped data.
+    pub fn map<U, F: FnOnce(T) -> U>(self, map: F) -> Spanned<U> {
+        let (data, span) = self.destruct();
+        Spanned::new(map(data), span)
+    }
+
     /// Returns the [`Span`] of this spanned data.
     ///
     /// [`Span`]: ./struct.Span.html
     pub fn span(&self) -> Span {
         self.span
+    }
+
+    /// Returns a reference to the data inside self.
+    pub fn data(&self) -> &T {
+        &self.data
     }
 
     /// Destructs this spanned data into it's `T` and [`Span`].
@@ -115,10 +128,54 @@ impl<T> Spanned<T> {
     }
 }
 
-impl<T> Deref for Spanned<T> {
-    type Target = T;
+/// Represents any `T` that is located at a specific [`Span`]
+/// in a specific file.
+///
+/// [`Span`]: ./struct.Span.html
+#[derive(Clone, Debug, Hash, Eq, PartialEq)]
+pub struct Locatable<T> {
+    span: Span,
+    data: T,
+    file: FileId,
+}
 
-    fn deref(&self) -> &Self::Target {
+impl<T> Locatable<T> {
+    /// Creates a new `Spanned` object with the given `data` and `span`.
+    pub fn new(data: T, file: FileId, span: Span) -> Self {
+        Self { data, file, span }
+    }
+
+    /// Maps the data of this `Locatable` using the given mapper
+    /// and returns a new `Locatable` with the mapped data.
+    pub fn map<U, F: FnOnce(T) -> U>(self, map: F) -> Locatable<U> {
+        let (data, file, span) = self.destruct();
+        Locatable::new(map(data), file, span)
+    }
+
+    /// Returns the [`Span`] of this spanned data.
+    ///
+    /// [`Span`]: ./struct.Span.html
+    pub fn span(&self) -> Span {
+        self.span
+    }
+
+    /// Returns a reference to the data inside self.
+    pub fn data(&self) -> &T {
         &self.data
+    }
+
+    /// Returns the [`FileId`] of this spanned data.
+    ///
+    /// [`FileId`]: ../source/struct.FileId.html
+    pub fn file(&self) -> FileId {
+        self.file
+    }
+
+    /// Destructs this spanned data into it's `T`, [`FileId`] and [`Span`].
+    ///
+    /// [`Span`]: ./struct.Span.html
+    /// [`FileId`]: ../source/struct.FileId.html
+    pub fn destruct(self) -> (T, FileId, Span) {
+        (self.data, self.file, self.span)
     }
 }

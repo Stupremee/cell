@@ -4,7 +4,7 @@ mod file;
 mod span;
 
 pub use file::{File, FileCache, FileId};
-pub use span::{Index, Span, Spanned};
+pub use span::{Index, Locatable, Span, Spanned};
 
 use smol_str::SmolStr;
 use std::{ops::Range, sync::Arc};
